@@ -340,7 +340,7 @@
     </div>
 
     <!-- Status text hint -->
-    <div class="tap-hint" id="statusHint">✦ Tap to Open Profile</div>
+    <div class="tap-hint" id="statusHint">Tap to Open Profile</div>
 </div>
 
 <script>
@@ -360,12 +360,12 @@
             clearTimeout(autoCloseTimer);
             autoCloseTimer = setTimeout(() => {
                 envelope.classList.remove('open');
-                statusHint.innerText = "✦ Tap to Open Profile";
+                statusHint.innerText = "Tap to Open Profile";
                 statusHint.style.color = "#4338ca";
             }, 120000); 
             
         } else {
-            statusHint.innerText = "✦ Tap to Open Profile";
+            statusHint.innerText = "Tap to Open Profile";
             statusHint.style.color = "#4338ca";
             clearTimeout(autoCloseTimer);
         }
