@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratheesh J - Premium Interactive Portfolio</title>
+    <style>
+        :root {
+            --primary: #1e1b4b; 
+            --accent: #4338ca;  
+            --bg: #f8fafc;      
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        .portfolio-container {
+            position: relative;
+            width: 420px;
+            height: 680px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        .envelope-header-text {
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+            opacity: 0.8;
+        }
+        .envelope.open .envelope-header-text {
+            opacity: 0; 
+        }
+
+        /* 1. ENVELOPE BASE */
+        .envelope {
+            position: relative;
+            width: 380px;
+            height: 250px;
+            background-color: #ffffff;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            z-index: 20;
+            border: 1px solid #f1f5f9;
+        }
+
+        .envelope-lid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 190px solid transparent;
+            border-right: 190px solid transparent;
+            border-top: 135px solid #f1f5f9;
+            transform-origin: top;
+            transition: transform 0.5s ease, z-index 0.5s;
+            z-index: 25;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .envelope-lid-secondary {
+            border-top-color: #e2e8f0;
+            transform: scale(0.98);
+            z-index: 24;
+        }
+
+        .job-seal {
+            position: absolute;
+            top: 105px;
+            left: 160px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            z-index: 26;
+            box-shadow: 0 10px 15px -3px rgba(67, 56, 202, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 0.5px;
+            transition: all 0.5s ease;
+        }
+
+        /* 2. CARD WRAPPER */
+        .card-wrapper {
+            position: absolute;
+            width: 340px;
+            height: 510px; 
+            left: 40px;
+            bottom: 10px; 
+            z-index: 5;
+            perspective: 1500px; 
+            opacity: 0; 
+            transform: translateY(0);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1), opacity 0.4s ease;
+        }
+
+        /* 3. THE 3D BOOKLET CARD */
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            background: #ffffff;
+            border-radius: 12px;
+        }
+
+        .card-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-origin: left;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            z-index: 10;
+        }
+
+        .card-side-primary {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            backface-visibility: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .card-title-main { font-size: 1.7rem; margin: 0; font-weight: 800; letter-spacing: 0.5px; }
+        .card-title-secondary { font-size: 0.85rem; opacity: 0.85; margin-top: 12px; font-weight: 400; line-height: 1.4; }
+
+        .card-side-secondary {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #f8fafc;
+            border-radius: 12px;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            box-sizing: border-box;
+            overflow-y: auto; 
+            color: var(--text-main);
+            font-size: 0.82rem;
+            line-height: 1.6;
+            border: 1px solid #e2e8f0;
+            z-index: 1;
+        }
+
+        /* INTERACTIVE STATES */
+        .envelope.open .envelope-lid {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+        .envelope.open .job-seal {
+            transform: translateY(110px) rotate(360deg);
+            opacity: 0;
+        }
+
+        .envelope.open + .card-wrapper {
+            transform: translateY(-340px); 
+            opacity: 1;
+            z-index: 30; 
+        }
+
+        .envelope.open + .card-wrapper .card-cover {
+            transform: rotateY(-150deg); 
+        }
+
+        /* CV Content Formatting */
+        .section-title { font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin: 16px 0 6px 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 4px; letter-spacing: 0.5px; }
+        p { margin: 0 0 8px 0; }
+        ul { margin: 0; padding-left: 16px; color: var(--text-muted); }
+        li { margin-bottom: 6px; }
+        .badge-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .badge { background-color: #f1f5f9; color: #334155; padding: 3px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 500; border: 1px solid #e2e8f0; }
+        
+        .cta-button {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(67, 56, 202, 0.2);
+            transition: opacity 0.2s;
+        }
+        .cta-button:hover { opacity: 0.95; }
+
+        .tap-hint {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: #ffffff;
+            padding: 8px 20px;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            z-index: 35;
+            border: 1px solid #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="portfolio-container">
+    
+    <!-- ENVELOPE STRUCTURE -->
+    <div class="envelope" id="myEnvelope" onclick="togglePortfolio()">
+        <div class="envelope-header-text">Interactive Digital Portfolio<br>✦ Tap to unwrap my journey ✦</div>
+        <div class="envelope-lid"></div>
+        <div class="envelope-lid envelope-lid-secondary"></div>
+        <div class="job-seal">VIEW<br>CV</div> 
+    </div>
+
+    <!-- 3D BOOKLET CARD WRAPPER -->
+    <div class="card-wrapper">
+        <div class="card">
+            
+            <!-- 3D Folding Cover -->
+            <div class="card-cover">
+                <div class="card-side card-side-primary">
+                    <h1 class="card-title-main">RATHEESH J</h1>
+                    <p class="card-title-secondary">Data Annotation & Quality Assurance Specialist<br>Mechanical Engineering Graduate</p>
+                    <p style="font-size: 0.75rem; margin-top: 40px; opacity: 0.8; letter-spacing: 0.5px;">📍 Karur, Tamilnadu</p>
+                </div>
+                <div class="card-side card-side-secondary"></div>
+            </div>
+
+            <!-- Inside Sheet: Full Resume Content -->
+            <div class="card-body">
+                <div style="font-weight: 800; color: var(--primary); font-size: 1.1rem; margin-bottom: 2px; letter-spacing: 0.5px;">RATHEESH J</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px;">✉️ mrratheeshkannan007@gmail.com | 🔗 linkedin.com/in/ratheeshj</div>
+                
+                <div class="section-title">Summary</div>
+                <p style="color: var(--text-muted); text-align: justify; font-size: 0.8rem;">
+                    Detail-oriented Data Annotation and Data Labeling professional with 2.5+ years of experience managing multimodal datasets with 99%+ precision and recall on high-impact projects and improved quality control using CVAT, AWS SageMaker Ground Truth, and Segments.ai. Strong background in 3D/2D bounding boxes, semantic segmentation, and QA process optimization, object detection, label optimization, efficiency enhancements for various applications, including automotive sector. Combines data Analytics with Mechanical Engineering foundation, graduated with a first class and strong academic achievements.
+                </p>
+
+                <div class="section-title">Skills</div>
+                <p style="margin-bottom: 4px;"><strong>Annotation Tools:</strong> CVAT, Segments.ai, AWS SageMaker Ground Truth, Labelbox</p>
+                <p style="margin-bottom: 4px;"><strong>Labeling Types:</strong> Image Classification, Video Annotation, Text Segmentation, Audio Markup, Object Detection</p>
+                <p style="margin-bottom: 4px;"><strong>Programming & Data:</strong> Python (Foundational), MySQL (Basics), HTML</p>
+                <p style="margin-bottom: 4px;"><strong>Tools & Platforms:</strong> GitHub (basics), Jira (basic), Microsoft Office (Excel, Word, PowerPoint, Loop)</p>
+
+                <div class="section-title">Professional Attributes</div>
+                <ul>
+                    <li>Attention to Detail & Data Accuracy</li>
+                    <li>Workflow Optimization, Quality Assurance and Project Metrics Evaluation & Goal Tracking</li>
+                    <li>Critical Thinking, Problem Solving & Collaboration and Team Communication</li>
+                    <li>Time Management, Adaptability, Shift Flexibility and Reliability in Deadline-Driven Environments</li>
+                </ul>
+
+                <div class="section-title">Professional Experience</div>
+                <p style="margin: 0; font-weight: 600;">Senior Data Analyst</p>
+                <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">Objectways Technologies, Karur | Sep 2022 - Oct 2025</p>
+                <ul style="margin-top: 6px;">
+                    <li><strong>Quality Assurance:</strong> Audited Complex multimodal datasets, maintaining a 99%+ precision and recall rate according to model specifications.</li>
+                    <li><strong>Process Optimization:</strong> Collaborated with ML engineers and data scientists to refine annotation protocols and optimize operational workflows.</li>
+                    <li><strong>Project Delivery:</strong> Delivered high-volume datasets under tight deadlines while sustaining maximum accuracy and team productivity.</li>
+                    <li><strong>Team Mentorship:</strong> Provided technical guidance, performance feedback, data corrections to enhance overall project focus and quality.</li>
+                </ul>
+
+                <div class="section-title">Education</div>
+                <p style="margin: 0; font-weight: 600;">Bachelor of Engineering (BE) - Mechanical Engineering</p>
+                <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">Arulmurugan College of Engineering, Anna University, Karur | 2018-2022</p>
+                <p style="font-size: 0.78rem; margin: 4px 0 6px 0; color: var(--text-main);">Grade: <strong>CGPA: 7.61 (76.1%) - First Class</strong></p>
+
+                <div class="section-title">Academic Projects</div>
+                <ul>
+                    <li><strong>Web Design for College Symposium:</strong> Developed layouts using Photoshop and HTML.</li>
+                    <li><strong>Electromechanical Rotary Damping and Energy Harvesting System (Cycle Suspension):</strong> Co-designed and evaluated a functional mechanical prototype focused on kinetic energy principles.</li>
+                    <li><strong>Natural Composite Materials:</strong> Research on Bio-Composites using Jute, Coir, and Eggshell Powder.</li>
+                </ul>
+
+                <div class="section-title">Academic Skills & References</div>
+                <ul>
+                    <li>Wind Energy Systems - Basics (OR0551-Renewable Energy Sources - Grade A+)</li>
+                    <li>PLC & Automation Basics (ME8791-Mechatronics - Grade A)</li>
+                    <li>Python Foundational (GE8151-Problem Solving and Python Programming - Grade A)</li>
+                </ul>
+
+                <div class="section-title">Certifications</div>
+                <div class="badge-container">
+                    <span class="badge">Python (Great Learning)</span>
+                    <span class="badge">MySQL basics (Great Learning)</span>
+                    <span class="badge">HTML (Great Learning)</span>
+                    <span class="badge">Semantic Segmentation (Coursera AWS)</span>
+                </div>
+
+                <a href="mailto:mrratheeshkannan007@gmail.com?subject=Job%20Opportunity%20/%20Interview%20Invitation" class="cta-button">📩 Contact Me via Mail</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Status text hint -->
+    <div class="tap-hint" id="statusHint">✦ Tap to Open Profile</div>
+</div>
+
+<script>
+    let autoCloseTimer;
+
+    function togglePortfolio() {
+        const envelope = document.getElementById('myEnvelope');
+        const statusHint = document.getElementById('statusHint');
+        
+        envelope.classList.toggle('open');
+        
+        if (envelope.classList.contains('open')) {
+            statusHint.innerText = "✕ Tap to Close Profile";
+            statusHint.style.color = "#ef4444";
+            
+            // EXACTLY 2 MINUTES AUTO CLOSE TRIGGER
+            clearTimeout(autoCloseTimer);
+            autoCloseTimer = setTimeout(() => {
+                envelope.classList.remove('open');
+                statusHint.innerText = "✦ Tap to Open Profile";
+                statusHint.style.color = "#4338ca";
+            }, 120000); 
+            
+        } else {
+            statusHint.innerText = "✦ Tap to Open Profile";
+            statusHint.style.color = "#4338ca";
+            clearTimeout(autoCloseTimer);
+        }
+    }
+</script>
+
+</body>
+</html>
