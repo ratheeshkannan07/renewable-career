@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ratheesh J - Premium Interactive Portfolio</title>
+    <title>Ratheesh J - Interactive Portfolio</title>
     <style>
         :root {
-            --primary-blue: #38bdf8;
-            --primary-green: #34d399;
-            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            --resume-bg: linear-gradient(185deg, #1e293b 0%, #0f172a 100%);
-            --text-white: #f8fafc;
-            --text-dim: #cbd5e1;
-            --border-glow: rgba(56, 189, 248, 0.2);
+            --primary-blue: #1d4ed8;
+            --primary-green: #065f46;
+            --bg-gradient: linear-gradient(135deg, #cbd5e1 0%, #f1f5f9 100%);
+            --resume-bg: linear-gradient(135deg, #e0f2fe 0%, #d1fae5 100%);
+            --text-main: #0f172a;
+            --text-muted: #334155;
         }
 
         * {
@@ -33,7 +32,6 @@
             padding: 10px;
         }
 
-        /* DYNAMIC AUTO-FIT CONTAINER */
         .portfolio-container {
             position: relative;
             width: 100%;
@@ -55,21 +53,19 @@
             margin-bottom: 15px;
             text-transform: uppercase;
             transition: opacity 0.3s ease;
-            text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
         }
         
         .envelope.open .envelope-header-text {
             opacity: 0; 
         }
 
-        /* STYLISH ENVELOPE BASE */
         .envelope {
             position: relative;
             width: 100%;
             height: 190px;
             background-color: #ffffff;
             border-radius: 0 0 16px 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
             cursor: pointer;
             z-index: 40;
             border: 1px solid #e2e8f0;
@@ -110,10 +106,10 @@
             left: calc(50% - 28px); 
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            background: linear-gradient(135deg, #2563eb, #10b981);
             border-radius: 50%;
             z-index: 46;
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -123,7 +119,6 @@
             text-align: center;
         }
 
-        /* 3D BOOK FLIP OVERLAY WRAPPER */
         .card-wrapper {
             position: absolute;
             width: 94%;
@@ -158,7 +153,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             border-radius: 14px;
             display: flex;
             flex-direction: column;
@@ -168,25 +163,23 @@
             backface-visibility: hidden;
             text-align: center;
             padding: 20px;
-            border: 2px solid var(--primary-blue);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .card-title-main { font-size: 1.6rem; margin: 0; font-weight: 800; letter-spacing: 0.5px; color: #ffffff; }
-        .card-title-secondary { font-size: 0.78rem; color: var(--primary-blue); margin-top: 8px; font-weight: 600; }
+        .card-title-main { font-size: 1.6rem; margin: 0; font-weight: 800; letter-spacing: 0.5px; }
+        .card-title-secondary { font-size: 0.78rem; color: #38bdf8; margin-top: 8px; font-weight: 600; }
 
         .card-side-secondary {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #1e293b;
+            background: #ffffff;
             border-radius: 14px;
             transform: rotateY(180deg);
             backface-visibility: hidden;
-            border: 1px solid var(--border-glow);
+            border: 1px solid #e2e8f0;
         }
 
-        /* PREMIUM DYNAMIC GRAPHITE STYLING INTERIOR */
         .card-body {
             position: absolute;
             width: 100%;
@@ -195,15 +188,14 @@
             border-radius: 14px;
             padding: 16px;
             overflow-y: auto; 
-            color: var(--text-white);
+            color: var(--text-main);
             font-size: 0.78rem;
             line-height: 1.5;
-            border: 1px solid var(--border-glow);
+            border: 1px solid #94a3b8;
             z-index: 5;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        /* ANIMATION TRIGGERS FOR TOGGLING */
         .envelope.open .envelope-lid {
             transform: rotateX(180deg);
         }
@@ -221,20 +213,19 @@
             transform: rotateY(-145deg); 
         }
 
-        /* HEADINGS TITLES CUSTOMIZED DESIGN COLORS */
-        .head-blue { color: var(--primary-blue); border-bottom: 1px solid rgba(56, 189, 248, 0.2); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; margin: 14px 0 6px 0; padding-bottom: 3px; letter-spacing: 0.5px; }
-        .head-green { color: var(--primary-green); border-bottom: 1px solid rgba(52, 211, 153, 0.2); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; margin: 14px 0 6px 0; padding-bottom: 3px; letter-spacing: 0.5px; }
+        .head-blue { color: #1d4ed8; border-bottom: 2px solid #3b82f6; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; margin: 14px 0 6px 0; padding-bottom: 3px; letter-spacing: 0.5px; }
+        .head-green { color: #065f46; border-bottom: 2px solid #10b981; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; margin: 14px 0 6px 0; padding-bottom: 3px; letter-spacing: 0.5px; }
 
-        p { margin: 0 0 5px 0; text-align: justify; color: var(--text-dim); }
+        p { margin: 0 0 5px 0; text-align: justify; color: var(--text-main); }
         ul { margin: 0 0 6px 0; padding-left: 14px; }
-        li { margin-bottom: 4px; text-align: justify; color: var(--text-dim); }
+        li { margin-bottom: 4px; text-align: justify; color: var(--text-muted); }
         
         .badge-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-        .badge { background: rgba(255, 255, 255, 0.06); color: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .badge { background: rgba(255, 255, 255, 0.7); color: #0f172a; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 600; border: 1px solid #cbd5e1; }
         
         .cta-button {
             display: block;
-            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            background: linear-gradient(135deg, #2563eb, #10b981);
             color: white;
             text-align: center;
             padding: 10px;
@@ -243,20 +234,20 @@
             border-radius: 8px;
             margin-top: 14px;
             font-size: 0.8rem;
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
         }
 
         .tap-hint {
             margin-top: 12px;
             font-size: 0.78rem;
             font-weight: 700;
-            color: var(--primary-blue);
-            background: #0f172a;
+            color: #2563eb;
+            background: #ffffff;
             padding: 6px 16px;
             border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             z-index: 60;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid #e2e8f0;
             cursor: pointer;
         }
 
@@ -275,7 +266,6 @@
 
 <div class="portfolio-container">
     
-    <!-- ENVELOPE STRUCTURE -->
     <div class="envelope" id="myEnvelope" onclick="togglePortfolio()">
         <div class="envelope-header-text">Interactive Digital Portfolio<br>✦ Tap to unwrap my journey ✦</div>
         <div class="envelope-lid"></div>
@@ -283,11 +273,9 @@
         <div class="job-seal">VIEW<br>CV</div> 
     </div>
 
-    <!-- 3D BOOK FLIP OVERLAY WRAPPER -->
     <div class="card-wrapper" id="myCardWrapper">
         <div class="card">
             
-            <!-- 3D Book Cover Flap -->
             <div class="card-cover">
                 <div class="card-side card-side-primary">
                     <h1 class="card-title-main">RATHEESH J</h1>
@@ -297,17 +285,16 @@
                 <div class="card-side card-side-secondary"></div>
             </div>
 
-            <!-- Inside Page Content: Resume Text -->
             <div class="card-body">
-                <div style="font-weight: 800; color: #ffffff; font-size: 1.1rem; margin-bottom: 2px;">RATHEESH J</div>
-                <div style="font-size: 0.7rem; color: #94a3b8; margin-bottom: 10px; line-height: 1.4;">
+                <div style="font-weight: 800; color: #0f172a; font-size: 1.1rem; margin-bottom: 2px;">RATHEESH J</div>
+                <div style="font-size: 0.7rem; color: #475569; margin-bottom: 10px; line-height: 1.4;">
                     📱 +91 9751614549 | ✉️ mrratheeshkannan007@gmail.com<br>
                     🔗 linkedin.com/in/ratheeshj
                 </div>
                 
                 <div class="head-blue">📝 Professional Summary</div>
                 <p>
-                    Detail-oriented Mechanical Engineering graduate with 2.5+ years of professional experience in Quality Assurance (QA), technical data validation, and engineering documentation[span_2](start_span)[span_2](end_span). Proven track record of managing complex engineering and multimodal datasets with 99%+ precision while optimizing workflows and tracking performance KPIs[span_3](start_span)[span_3](end_span). Strong academic foundation in Wind Energy Systems, Renewable Energy Sources, and PLC Automation Fundamentals[span_4](start_span)[span_4](end_span). Seeking opportunities as a Graduate Engineer Trainee (GET), Engineering Support Engineer, Quality Assurance Engineer, Operations & Maintenance (O&M) Trainee, or Wind Turbine Technician within the Renewable Energy sector[span_5](start_span)[span_5](end_span). Eager to undergo professional training and leverage my data analytics expertise while developing hands-on knowledge in SCADA systems, Control Room Operations, and wind & solar power operations[span_6](start_span)[span_6](end_span).
+                    Detail-oriented Mechanical Engineering graduate with 2.5+ years of professional experience in Quality Assurance (QA), technical data validation, and engineering documentation. Proven track record of managing complex engineering and multimodal datasets with 99%+ precision while optimizing workflows and tracking performance KPIs. Strong academic foundation in Wind Energy Systems, Renewable Energy Sources, and PLC Automation Fundamentals. Seeking opportunities as a Graduate Engineer Trainee (GET), Engineering Support Engineer, Quality Assurance Engineer, Operations & Maintenance (O&M) Trainee, or Wind Turbine Technician within the Renewable Energy sector. Eager to undergo professional training and leverage my data analytics expertise while developing hands-on knowledge in SCADA systems, Control Room Operations, and wind & solar power operations.
                 </p>
 
                 <div class="head-green">🛠️ Core Competencies</div>
@@ -315,44 +302,44 @@
                     <span class="badge">Technical QA & QC</span>
                     <span class="badge">BOM Verification</span>
                     <span class="badge">Engineering Documentation Review</span>
-                    <span class="badge">Technical Data Validation</span>
-                    <span class="badge">Process Optimization</span>
-                    <span class="badge">Root Cause Analysis (RCA)</span>
+                    <span class="badge">Technical Data Validation & Verification</span>
+                    <span class="badge">Process Optimization & Workflow Improvement</span>
+                    <span class="badge">Root Cause Analysis (RCA) Support</span>
                     <span class="badge">KPI Tracking & Reporting</span>
-                    <span class="badge">Wind Energy Systems</span>
-                    <span class="badge">PLC Automation Basics</span>
+                    <span class="badge">Wind Energy Systems & Turbine Basics</span>
+                    <span class="badge">PLC Automation & Mechatronics Basics</span>
                     <span class="badge">MS Excel</span>
                 </div>
 
                 <div class="head-blue">💼 Professional Experience</div>
-                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.75rem; color: #ffffff;">
+                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.75rem; color: #0f172a;">
                     <span>Senior Data Analyst</span>
-                    <span style="color: var(--primary-blue);">Sep 2022 - Oct 2025</span>
+                    <span style="color: #2563eb;">Sep 2022 - Oct 2025</span>
                 </div>
-                <div style="font-size: 0.68rem; color: #94a3b8; margin-bottom: 4px;">Objectways Technologies, Karur[span_7](start_span)[span_7](end_span)</div>
+                <div style="font-size: 0.68rem; color: #475569; margin-bottom: 4px;">Objectways Technologies, Karur</div>
                 <ul>
-                    <li>Audited complex engineering and multimodal datasets using CVAT, AWS SageMaker Ground Truth, and Segments.ai, consistently maintaining 99%+ precision and recall through Quality Assurance (QA) and Quality Control (QC) processes[span_8](start_span)[span_8](end_span).</li>
-                    <li>Verified technical documentation, structured engineering records, and Bill of Materials (BOM) forms to ensure data accuracy, consistency, and compliance with project requirements[span_9](start_span)[span_9](end_span).</li>
-                    <li>Collaborated with engineering teams to identify workflow bottlenecks, support Root Cause Analysis (RCA), and drive process optimization, workflow improvement, and continuous process improvement[span_10](start_span)[span_10](end_span).</li>
-                    <li>Prepared daily KPI reports, performance metrics, technical documentation, and Microsoft Excel operational reports while providing technical guidance and quality feedback to junior analysts[span_11](start_span)[span_11](end_span).</li>
+                    <li>Audited complex engineering and multimodal datasets using CVAT, AWS SageMaker Ground Truth, and Segments.ai, consistently maintaining 99%+ precision and recall through Quality Assurance (QA) and Quality Control (QC) processes.</li>
+                    <li>Verified technical documentation, structured engineering records, and Bill of Materials (BOM) forms to ensure data accuracy, consistency, and compliance with project requirements.</li>
+                    <li>Collaborated with engineering teams to identify workflow bottlenecks, support Root Cause Analysis (RCA), and drive process optimization, workflow improvement, and continuous process improvement.</li>
+                    <li>Prepared daily KPI reports, performance metrics, technical documentation, and Microsoft Excel operational reports while providing technical guidance and quality feedback to junior analysts.</li>
                 </ul>
 
                 <div class="head-green">📚 Education</div>
-                <div style="font-weight: 700; color: #ffffff;">B.E - Mechanical Engineering</div>
-                <div style="font-size: 0.68rem; color: #94a3b8;">Arulmurugan College of Engineering, Anna University | 2018-2022[span_12](start_span)[span_12](end_span)</div>
-                <p style="margin-top: 2px;">Grade: CGPA: 7.61 (First Class)[span_13](start_span)[span_13](end_span)</p>
+                <div style="font-weight: 700; color: #0f172a;">B.E - Mechanical Engineering</div>
+                <div style="font-size: 0.68rem; color: #475569;">Arulmurugan College of Engineering, Anna University | 2018-2022</div>
+                <p style="margin-top: 2px;">Grade: CGPA: 7.61 (First Class)</p>
 
-                <div style="margin-top: 6px; font-weight: 600; color: #ffffff;">Relevant Academic Knowledge:</div>
+                <div style="margin-top: 6px; font-weight: 600; color: #0f172a;">Relevant Academic Knowledge:</div>
                 <ul style="margin-top: 2px;">
-                    <li><strong>Renewable Energy (Wind & Solar):</strong> Academic knowledge of wind & solar energy fundamentals, wind turbine basics, and renewable energy sources (Grade A+)[span_14](start_span)[span_14](end_span).</li>
-                    <li><strong>PLC Automation Fundamentals:</strong> Academic knowledge of PLC fundamentals, basic automation concepts (Grade A)[span_15](start_span)[span_15](end_span).</li>
-                    <li><strong>Python Fundamentals:</strong> Foundational knowledge of programming logic and engineering problem-solving (Grade A)[span_16](start_span)[span_16](end_span).</li>
+                    <li><strong>Renewable Energy (Wind & Solar):</strong> Academic knowledge of wind & solar energy fundamentals, wind turbine basics, and renewable energy sources (Grade A+).</li>
+                    <li><strong>PLC Automation Fundamentals:</strong> Academic knowledge of PLC fundamentals, basic automation concepts (Grade A).</li>
+                    <li><strong>Python Fundamentals:</strong> Foundational knowledge of programming logic and engineering problem-solving (Grade A).</li>
                 </ul>
 
                 <div class="head-blue">🚀 Academic Projects</div>
                 <ul>
-                    <li><strong>Electromechanical Rotary Damping and Energy Harvesting System:</strong> Co-designed, developed, and evaluated a functional electromechanical prototype focused on vibration damping, kinetic energy harvesting, structural assessment, and mechanical performance analysis[span_17](start_span)[span_17](end_span).</li>
-                    <li><strong>Natural Composite Materials Fabrication:</strong> Researched and developed environmentally friendly bio-composite materials using Jute, Coir, and Eggshell Powder while conducting material testing, structural evaluation, and quality inspection[span_18](start_span)[span_18](end_span).</li>
+                    <li><strong>Electromechanical Rotary Damping and Energy Harvesting System:</strong> Co-designed, developed, and evaluated a functional electromechanical prototype focused on vibration damping, kinetic energy harvesting, structural assessment, and mechanical performance analysis.</li>
+                    <li><strong>Natural Composite Materials Fabrication:</strong> Researched and developed environmentally friendly bio-composite materials using Jute, Coir, and Eggshell Powder while conducting material testing, structural evaluation, and quality inspection.</li>
                 </ul>
 
                 <div class="head-green">⚙️ Technical Tools</div>
@@ -362,11 +349,11 @@
                     <span class="badge">Microsoft PowerPoint</span>
                     <span class="badge">Microsoft Loop</span>
                     <span class="badge">CVAT</span>
-                    <span class="badge">AWS SageMaker</span>
+                    <span class="badge">AWS SageMaker Ground Truth</span>
                     <span class="badge">Segments.ai</span>
                     <span class="badge">Labelbox</span>
-                    <span class="badge">Jira</span>
-                    <span class="badge">GitHub</span>
+                    <span class="badge">Jira (Basic)</span>
+                    <span class="badge">GitHub (Basic)</span>
                 </div>
 
                 <div class="head-blue">🏅 Certifications</div>
@@ -383,7 +370,6 @@
         </div>
     </div>
 
-    <!-- Status text hint -->
     <div class="tap-hint" id="statusHint" onclick="togglePortfolio()">Tap to Open Profile</div>
 </div>
 
@@ -425,11 +411,10 @@
         envelope.style.zIndex = "40";
         cardWrapper.style.zIndex = "10";
         statusHint.innerText = "Tap to Open Profile";
-        statusHint.style.color = "var(--primary-blue)";
+        statusHint.style.color = "#2563eb";
         clearTimeout(autoCloseTimer);
     }
 </script>
 
 </body>
-    </html>
-    
+</html>
