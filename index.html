@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ratheesh J - Premium Interactive Portfolio</title>
     <style>
         :root {
@@ -14,26 +14,415 @@
             --text-muted: #64748b;
         }
 
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: var(--bg);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow-x: hidden;
-            box-sizing: border-box;
+            overflow: hidden;
             padding: 10px;
         }
 
-        /* 100% RESPONSIVE CONTAINER */
+        /* FLEXIBLE COMPATIBLE CONTAINER */
         .portfolio-container {
             position: relative;
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
+            height: 85vh;
+            max-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding-bottom: 10px;
+        }
+
+        .envelope-header-text {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+            opacity: 0.9;
+            line-height: 1.3;
+        }
+        
+        .envelope.open .envelope-header-text {
+            opacity: 0; 
+        }
+
+        /* RESPONSIVE ENVELOPE */
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background-color: #ffffff;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+            cursor: pointer;
+            z-index: 20;
+            border: 1px solid #e2e8f0;
+        }
+
+        .envelope-lid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-top: 115px solid #f8fafc;
+            transform-origin: top;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.5s;
+            z-index: 25;
+            border-radius: 8px 8px 0 0;
+        }
+
+        @media (max-width: 440px) {
+            .envelope-lid {
+                border-left-width: calc((100vw - 20px) / 2);
+                border-right-width: calc((100vw - 20px) / 2);
+            }
+        }
+
+        .envelope-lid-secondary {
+            border-top-color: #e2e8f0;
+            transform: scale(0.99);
+            z-index: 24;
+        }
+
+        .job-seal {
+            position: absolute;
+            top: 85px;
+            left: calc(50% - 30px); 
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            z-index: 26;
+            box-shadow: 0 8px 16px -4px rgba(37, 99, 235, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: 0.5px;
+            transition: all 0.5s ease;
+        }
+
+        /* RESPONSIVE CARD WRAPPER */
+        .card-wrapper {
+            position: absolute;
+            width: 92%;
+            height: 70vh;
+            max-height: 440px; 
+            bottom: 25px; 
+            z-index: 5;
+            perspective: 1500px; 
+            opacity: 0; 
+            transform: translateY(0);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.4s ease;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            background: #ffffff;
+            border-radius: 14px;
+        }
+
+        .card-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-origin: left;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            z-index: 10;
+        }
+
+        .card-side-primary {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            backface-visibility: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card-title-main { font-size: 1.6rem; margin: 0; font-weight: 800; letter-spacing: 0.5px; }
+        .card-title-secondary { font-size: 0.8rem; opacity: 0.9; margin-top: 10px; font-weight: 400; line-height: 1.4; }
+
+        .card-side-secondary {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #f8fafc;
+            border-radius: 14px;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 16px;
+            overflow-y: auto; 
+            color: var(--text-main);
+            font-size: 0.78rem;
+            line-height: 1.5;
+            border: 1px solid #e2e8f0;
+            z-index: 1;
+        }
+
+        /* INTERACTIVE OPEN STATES */
+        .envelope.open .envelope-lid {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+        .envelope.open .job-seal {
+            transform: translateY(100px) rotate(360deg);
+            opacity: 0;
+        }
+
+        .envelope.open + .card-wrapper {
+            transform: translateY(-200px); 
+            opacity: 1;
+            z-index: 30; 
+        }
+
+        .envelope.open + .card-wrapper .card-cover {
+            transform: rotateY(-140deg); 
+        }
+
+        /* CV FORMATTING */
+        .section-title { font-size: 0.75rem; font-weight: 800; color: var(--accent); text-transform: uppercase; margin: 12px 0 6px 0; border-bottom: 2px solid var(--accent-light); padding-bottom: 2px; letter-spacing: 0.5px; }
+        p { margin: 0 0 5px 0; text-align: justify; }
+        ul { margin: 0 0 6px 0; padding-left: 14px; }
+        li { margin-bottom: 4px; text-align: justify; color: #334155; }
+        
+        .badge-container { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+        .badge { background-color: var(--accent-light); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-size: 0.68rem; font-weight: 600; border: 1px solid #dbeafe; }
+        .badge-skill { background-color: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; }
+        
+        .cta-button {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+            font-size: 0.8rem;
+        }
+
+        .tap-hint {
+            margin-top: 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            z-index: 35;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+        }
+
+        /* LAPTOP/DESKTOP VIEW RE-ADJUSTMENT */
+        @media (min-width: 768px) {
+            .portfolio-container {
+                max-width: 400px;
+                max-height: 620px;
+            }
+            .card-wrapper {
+                max-height: 450px;
+            }
+            .envelope.open + .card-wrapper {
+                transform: translateY(-210px);
+            }
+            .envelope-lid {
+                border-left-width: 200px;
+                border-right-width: 200px;
+                border-top-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="portfolio-container">
+    
+    <!-- ENVELOPE STRUCTURE -->
+    <div class="envelope" id="myEnvelope" onclick="togglePortfolio()">
+        <div class="envelope-header-text">Interactive Digital Portfolio<br>✦ Tap to unwrap my journey ✦</div>
+        <div class="envelope-lid"></div>
+        <div class="envelope-lid envelope-lid-secondary"></div>
+        <div class="job-seal">VIEW<br>CV</div> 
+    </div>
+
+    <!-- 3D BOOKLET CARD WRAPPER -->
+    <div class="card-wrapper">
+        <div class="card">
+            
+            <!-- 3D Folding Cover -->
+            <div class="card-cover">
+                <div class="card-side card-side-primary">
+                    <h1 class="card-title-main">RATHEESH J</h1>
+                    <p class="card-title-secondary">Mechanical Graduate & QA Specialist<br>Renewable Energy Aspirant</p>
+                    <p style="font-size: 0.72rem; margin-top: 30px; opacity: 0.8;">📍 Karur, Tamil Nadu</p>
+                </div>
+                <div class="card-side card-side-secondary"></div>
+            </div>
+
+            <!-- Inside Sheet: Full Resume Content -->
+            <div class="card-body">
+                <div style="font-weight: 800; color: var(--primary); font-size: 1.1rem; margin-bottom: 2px;">RATHEESH J</div>
+                <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">
+                    📱 +91 9751614549 | ✉️ mrratheeshkannan007@gmail.com<br>
+                    🔗 linkedin.com/in/ratheeshj
+                </div>
+                
+                <div class="section-title">Professional Summary</div>
+                <p>
+                    Detail-oriented Mechanical Engineering graduate with 2.5+ years of professional experience in Quality Assurance (QA), technical data validation, and engineering documentation. Proven track record of managing complex engineering and multimodal datasets with 99%+ precision while optimizing workflows and tracking performance KPIs. Strong academic foundation in Wind Energy Systems, Renewable Energy Sources, and PLC Automation Fundamentals. Seeking opportunities as a Graduate Engineer Trainee (GET), Quality Assurance Engineer, or Operations & Maintenance (O&M) Trainee within the Renewable Energy sector.
+                </p>
+
+                <div class="section-title">Core Competencies</div>
+                <div class="badge-container">
+                    <span class="badge badge-skill">Technical QA & QC</span>
+                    <span class="badge badge-skill">BOM Verification</span>
+                    <span class="badge badge-skill">Process Optimization</span>
+                    <span class="badge badge-skill">Root Cause Analysis</span>
+                    <span class="badge badge-skill">KPI Tracking</span>
+                    <span class="badge badge-skill">Wind Energy Systems</span>
+                    <span class="badge badge-skill">PLC Automation</span>
+                    <span class="badge badge-skill">MS Excel</span>
+                </div>
+
+                <div class="section-title">Professional Experience</div>
+                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.78rem;">
+                    <span>Senior Data Analyst</span>
+                    <span style="color: var(--accent);">Sep 2022 - Oct 2025</span>
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px;">Objectways Technologies, Karur</div>
+                <ul>
+                    <li>Audited complex engineering and multimodal datasets using CVAT, AWS SageMaker, and Segments.ai, maintaining 99%+ precision.</li>
+                    <li>Verified technical documentation, structured engineering records, and Bill of Materials (BOM) forms to ensure data accuracy.</li>
+                    <li>Collaborated with engineering teams to identify bottlenecks, support Root Cause Analysis (RCA), and drive workflow improvement.</li>
+                    <li>Prepared daily KPI reports, performance metrics, and MS Excel operational reports while providing technical guidance.</li>
+                </ul>
+
+                <div class="section-title">Education</div>
+                <div style="font-weight: 700;">B.E. - Mechanical Engineering</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Arulmurugan College of Engineering, Anna University | 2018 - 2022</div>
+                <p style="margin-top: 2px;">Grade: <strong>CGPA: 7.61 (First Class)</strong></p>
+
+                <div class="section-title">Relevant Academic Knowledge</div>
+                <ul>
+                    <li><strong>Renewable Energy (Wind & Solar):</strong> Fundamental mechanics, turbine structures, and renewable energy assets. <span style="color:var(--accent); font-weight:600;">(Grade A+)</span></li>
+                    <li><strong>PLC Automation Fundamentals:</strong> PLC automation, logic gates, and basic mechatronics concepts. <span style="color:var(--accent); font-weight:600;">(Grade A)</span></li>
+                    <li><strong>Python Fundamentals:</strong> Foundational programming logic for engineering problem-solving. <span style="color:var(--accent); font-weight:600;">(Grade A)</span></li>
+                </ul>
+
+                <div class="section-title">Academic Projects</div>
+                <ul>
+                    <li><strong>Electromechanical Rotary Damping & Energy Harvesting System:</strong> Co-designed and evaluated a functional electromechanical cycle suspension prototype focused on kinetic energy harvesting.</li>
+                    <li><strong>Natural Composite Materials Fabrication:</strong> Research on eco-friendly bio-composites using Jute, Coir, and Eggshell powder including structural testing.</li>
+                </ul>
+
+                <div class="section-title">Technical Tools</div>
+                <div class="badge-container">
+                    <span class="badge badge-skill">MS Excel</span>
+                    <span class="badge badge-skill">CVAT</span>
+                    <span class="badge badge-skill">AWS SageMaker</span>
+                    <span class="badge badge-skill">Segments.ai</span>
+                    <span class="badge badge-skill">Labelbox</span>
+                    <span class="badge badge-skill">Jira</span>
+                    <span class="badge badge-skill">GitHub</span>
+                </div>
+
+                <div class="section-title">Certifications</div>
+                <div class="badge-container">
+                    <span class="badge">Python (Great Learning)</span>
+                    <span class="badge">MySQL Basics (Great Learning)</span>
+                    <span class="badge">HTML (Great Learning)</span>
+                    <span class="badge">Semantic Segmentation (AWS)</span>
+                </div>
+
+                <a href="mailto:mrratheeshkannan007@gmail.com?subject=Job%20Opportunity%20/%20Interview%20Invitation" class="cta-button">📩 Contact Me via Mail</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Status text hint -->
+    <div class="tap-hint" id="statusHint" onclick="togglePortfolio()">Tap to Open Profile</div>
+</div>
+
+<script>
+    let autoCloseTimer;
+
+    function togglePortfolio() {
+        const envelope = document.getElementById('myEnvelope');
+        const statusHint = document.getElementById('statusHint');
+        
+        envelope.classList.toggle('open');
+        
+        if (envelope.classList.contains('open')) {
+            statusHint.innerText = "✕ Tap to Close Profile";
+            statusHint.style.color = "#ef4444";
+            
+            clearTimeout(autoCloseTimer);
+            autoCloseTimer = setTimeout(() => {
+                envelope.classList.remove('open');
+                statusHint.innerText = "Tap to Open Profile";
+                statusHint.style.color = "#2563eb";
+            }, 120000); 
+            
+        } else {
+            statusHint.innerText = "Tap to Open Profile";
+            statusHint.style.color = "#2563eb";
+            clearTimeout(autoCloseTimer);
+        }
+    }
+</script>
+
+</body>
+</html>
             height: 85vh; 
             max-height: 660px;
             display: flex;
